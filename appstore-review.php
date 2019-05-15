@@ -103,6 +103,7 @@ function arc_fetch_data( $url, $cacheFile ) {
 		//Call the URL 4 times as it may not work the first time (API error?)
 		$json_data = null;
 		for ( $i = 0; $i < 4; $i ++ ) {
+
 			if ( function_exists( 'file_get_contents' ) && ini_get( 'allow_url_fopen' ) ) {
 				$json_data = arc_fetch_data_fopen( $url );
 			} else if ( function_exists( 'curl_exec' ) ) {
@@ -140,25 +141,16 @@ function arc_make_store_url( $atts ) {
 
 function arc_make_store_app_url( $atts ) {
 	$url = str_replace( "{id}", $atts['id'], APP_ARC_APPSTORE_APP_URL );
-
 	return $url;
 }
 
 function arc_fetch_data_fopen( $url ) {
 	$data = file_get_contents( $url );
-
 	return json_decode( $data );
 }
 
 function arc_fetch_data_curl( $url ) {
-	$ch = curl_init();
-	curl_setopt( $ch, CURLOPT_URL, $url );
-	curl_setopt( $ch, CURLOPT_HEADER, 0 );
-	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-	curl_setopt( $ch, CURLOPT_TIMEOUT, 10 );
-	$output = curl_exec( $ch );
-	curl_close( $ch );
-
+	$output = wp_remote_get($url);
 	return json_decode( $output );
 }
 
@@ -168,7 +160,6 @@ function arc_review_output( $jsonApp, $jsonReviews, $minStar, $nbToDisplay, $att
 	if ( $jsonApp->results == null ) {
 		return;
 	}
-
 	//Parse App info
 	$appInfo     = $jsonApp->results[0];
 	$app['name'] = $appInfo->trackName;
@@ -189,7 +180,7 @@ function arc_review_output( $jsonApp, $jsonReviews, $minStar, $nbToDisplay, $att
 		}
 	}
 
-	//Render HTML
+	//Save posts
 	if ( count( $reviews ) > 0 ) {
 		return arc_save_as_posts( $app, $reviews, $atts );
 	}
@@ -231,7 +222,7 @@ function arc_save_as_posts( $app, $reviews, $atts ) {
 	 */
 
 	foreach ( $reviews as $review ) {
-		if ( post_exists( $review['title'] ) !== null )
+		if ( post_exists( $review['title'] ) )
 		    continue;
 
 	    $postId = $review['id'];
