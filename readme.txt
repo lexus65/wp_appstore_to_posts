@@ -1,6 +1,6 @@
 === AppStore Reviews Viewer ===
-Contributors: lexus65
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SUZX9ZC8NR256&source=url
+Contributors: gilthonwe
+Donate link: http://bit.ly/1LbC1U9
 Tags: iOS, App Store, iTunes, apps, appstore, iphone, ipad, customer, reviews, ratings, review, rating, store, country, comment
 Requires at least: 3.1
 Tested up to: 4.9.8
@@ -12,21 +12,20 @@ Adds a shortcode that displays reviews and ratings of an app from the iOS AppSto
 
 == Description ==
 
-This plugin created selected types of post from Appstore reviews
+This plugin allows you to use the shortcode `ios_app_review` to embed iOS app reviews and ratings directly into your blog.
 
 What does it do?
-
+The first time a page with the shortcode is loaded, the plugin will try to download the reviews from Apple's servers. Then it will store them in a file and nicely display them on your page.
 Every time someone opens the page, instead of downloading the reviews again, the plugin will read them from the cache file. If the cache file is too old, the plugin will try to download new reviews from Apple's servers.
 
-This plugin created selected types of post from Appstore reviews.
+Check out some examples of what it produces here: http://www.gilthonwe.com (My iOS Apps section)
 
 == Installation ==
 
 1. Upload the plugin folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Go to Settings -> AppStore Reviews Viewer
-4. Fill up all fields
-5. Press button PULL REVIEWS
+3. Place the shortcode `[ios_app_review id="1234"]` (where "1234" is your application's App Store ID) anywhere in a post or page.
+4. More options are available on the Settings page of the plugin
 
 == Upgrade Notice ==
 
@@ -44,5 +43,35 @@ You may not have any review for the app in the country you selected. If you have
 
 == Changelog ==
 
-= 1.0.0 =
+= 1.2.3 =
+Small fix
+
+= 1.2.2 =
+Small fix
+
+= 1.2.1 =
+Small fix
+
+= 1.2.0 =
+Fixed an issue with the missing app icon
+
+= 1.1.0 =
+Changed the layout to be more responsive on mobile devices
+
+= 1.0.5 =
+Bugfix with jQuery
+
+= 1.0.4 =
+Small fix
+
+= 1.0.3 =
+Fixed an issue with the cache directory not being created
+
+= 1.0.2 =
+Removed the fadeIn/fadeOut animation when there is only one review to display
+
+= 1.0.1 =
+Small fix with the link to the Settings page
+
+= 1.0 =
 * Initial public release on Wordpress.org

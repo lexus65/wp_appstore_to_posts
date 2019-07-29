@@ -241,6 +241,7 @@ function arc_save_as_posts( $app, $reviews, $atts ) {
 			'post_title'   => $review['title'],
 			'post_type'    => $atts['defaultPostType'],
 			'meta_input'   => [
+				'author' => $review['author'],
 			    'country' => $atts['country'],
                 'star' => $review['rating'],
                 'app_icon' => $app['icon'],

@@ -46,7 +46,7 @@ add_action('admin_init', 'arc_register_settings_and_fields');
 add_action('admin_menu', 'arc_admin_page');
 
 function arc_admin_page() {
-	add_options_page('AppStore Reviews Posts Converter - Options', 'AppStore Reviews Posts Converter', 'manage_options', __FILE__, 'arc_render_admin_form');
+	add_options_page('AppStore Reviews Viewer - Options', 'AppStore Reviews Viewer', 'manage_options', __FILE__, 'arc_render_admin_form');
 }
 
 function arc_register_settings_and_fields() {
@@ -318,16 +318,10 @@ function arc_form_option_app_id() {
 
 function arc_render_admin_form() {
 ?>
-    <p>If you want to help this project you can donate below:</p>
-    <p>
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <input type="hidden" name="cmd" value="_s-xclick" />
-            <input type="hidden" name="hosted_button_id" value="SUZX9ZC8NR256" />
-            <input type="image" src="https://www.paypalobjects.com/en_US/RU/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-            <img alt="" border="0" src="https://www.paypal.com/en_RU/i/scr/pixel.gif" width="1" height="1" />
-        </form>
+	<p>
+        To use the plugin please manually press button below. If all fields are OK reviews will be saved as posts
     </p>
-
+	<p><a href="<?= admin_url('admin-post.php') ?>?action=arc_update_reviews" class="button-primary">Pull reviews</a></p>
 	<br/>
 	<form method="post" action="options.php">
 		<?php
@@ -338,13 +332,6 @@ function arc_render_admin_form() {
 			<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
 		</p>
 	</form>
-    <br />
-
-    <h3>You can PULL reviews now</h3>
-    <p>
-        To use the plugin please manually press button "Pull reviews" below. If all fields are OK reviews will be saved as posts
-    </p>
-    <p><a href="<?= admin_url('admin-post.php') ?>?action=arc_update_reviews" class="button-primary">Pull reviews</a></p>
-
+	
 <?php
 }
